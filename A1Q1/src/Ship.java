@@ -70,7 +70,7 @@ public class Ship {
 
         // A local counter for the type
         int sackCount=0;
-        //We will need to check each sack for type, so start at the start
+        // We will need to check each sack for type, so start at the start
         this.cargo.goFirst();
 
         //Check each existing sack

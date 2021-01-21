@@ -72,11 +72,21 @@ public class CargoSimulator {
         // Create a new cargo simulator object.
         CargoSimulator sim = new CargoSimulator(1000);
 
+        //set the cursor to the start of the fleet
         sim.fleet.goFirst();
 
+        //Outer loop goes through the ships one at a time
         while(sim.fleet.itemExists()) {
-            Ship currentShip = sim.fleet.item();
+
+
+             // Ship currentship - current ship is just a readability improvement (preference) for the inner nest
+             Ship currentShip = sim.fleet.item();
+
+
+             // int barleycount - since the barley count is per ship, we will start a counter for each ship
             int barleycount = 0;
+
+            // the inner loop, start at the first cargo "sack"
             currentShip.cargo.goFirst();
 
             while(currentShip.cargo.itemExists()){
@@ -84,14 +94,18 @@ public class CargoSimulator {
                 {
                     barleycount++;
                 }
+                //make sure we do all cargo in a a ship before going to the next ship
                 currentShip.cargo.goForth();
             }
             System.out.printf("%s is carrying %d sacks of barley.\n", currentShip.getName(), barleycount);
             sim.fleet.goForth();
         }
 
+        //reset the ship cursor
         sim.fleet.goFirst();
         while(sim.fleet.itemExists()) {
+
+            // currentShip, same as before, this is my own preferred readability improvement
             Ship currentShip = sim.fleet.item();
             currentShip.cargo.goFirst();
             if(currentShip.isOverloaded()) {
